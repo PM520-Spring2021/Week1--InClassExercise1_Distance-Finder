@@ -1,48 +1,32 @@
 ---
 title: "DistanceFinder"
 author: "Paul M"
-date: "12/3/2021"
-output: html_document
+date: "12/3/2020"
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## The Distance Finder Problem
 
 
-Here's the pseudocode for our problem. Your task is to fill out the code, run it, report the answer and then push it back to me using the repository that was created when you accepted this 'assignment' via the invitation you received from github.
-
-First create some global variables to dictate the parameters of the problem
+First you will need to create some global variables to dictate the parameters of the problem. For example...
 ```{r globals}
-#How many simulations to run?
-NumberOfSims <- 1000
-#What is the size of the grid?
+# How many simulations to run?
+NumberOfSims <- 10000
+
+# What is the size of the grid?
 a <- 10
 b <- 5
+
 set.seed(123)  # set the seed for the random number generator - this makes sure the results are reproducible when we are debugging
 
-#Declare a variable to keep track of the sum of the distances across all simulations
-Distance <- 0
+# Declare a variable or vector variable to keep track of the sum of the distances across all simulations
+Distance <- rep(0,NumberOfSims)  # Here's avector which, for now, we fill it with 0s
 ```
 
 
@@ -52,23 +36,22 @@ for (i in 1:NumberOfSims){
   # generate z1 (so generate it's x and y coordinates)
   z1 <- cbind(runif(1,0,a),runif(1,0,b))
   # generate z2 (likewise)
-
+  z2 <- cbind(runif(1,0,a),runif(1,0,b))
 
   # Use Pythagoras' theorem to find the distance between them
 
   # Add the distance to the variable Distance
 }
-
-# Divide Distance by NumberOfSims to calculate the average distance we observed across all sims
-AverageDistance <- Distance / NumberOfSims
 ```
 
-Then report your output and add any explanatory text you need to help the read what is going on.
-
+So let's see what happened. We'll calculate the average distance and look at the distribution of the distance across all simulations. Imagine we have all the Distances stored in a vector "Distance", then something like the following will work.
 ```{r output}
-cat("\nOur estimate of the expected distance between the two points is ",AverageDistance)
+cat("\nOur estimate of the expected distance between the two points is ",mean(Distance))
+hist(Distance,breaks=25,col="blue")
 ```
 
-It would better still to keep each distance in a vector and then plot a histogram of its distribution.
-Is the distribution from a family you recognize? (e.g. Normal, Poisson, Exponential,...?)
-Is there a theoretical answer to this problem?
+# Things to address:
+
+1. What happens as the sizwe of the rectangle changes? 
+2. Let's imagine we fix the area of the rectangle to be some value, R. Among all suxh rectangles, which is the one that maximizes the expected distance between two randomly chosen points.
+
