@@ -30,7 +30,7 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 
-Here's the pseudocode for our problem. Your task is to fill out thew code, run it, report the answer and then push it back to me using the reposiutory that was created when you accepted this 'assignment' via the invitation you received from github.
+Here's the pseudocode for our problem. Your task is to fill out the code, run it, report the answer and then push it back to me using the repository that was created when you accepted this 'assignment' via the invitation you received from github.
 
 First create some global variables to dictate the parameters of the problem
 ```{r globals}
